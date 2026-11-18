@@ -74,6 +74,8 @@ function renderProgress() {
   const quests = readJSON('ssait-quest-log-v1', []);
   const questList = Array.isArray(quests) ? quests : [];
   const questDone = questList.filter(task => task?.done).length;
+  const memory = readJSON('ssait-memory-best-v1', {});
+  const memoryWins = Math.max(0, Number(memory?.wins) || 0);
 
   document.querySelector('#signals-stat').textContent = `${signals.length} / 3`;
   document.querySelector('#runner-stat').textContent = `${Math.floor(runner / 12)} м`;
@@ -84,8 +86,10 @@ function renderProgress() {
   document.querySelector('#puzzle-stat').textContent = `${puzzleLevels} / 5`;
   document.querySelector('#notes-stat').textContent = String(noteCount);
   document.querySelector('#quests-stat').textContent = `${questDone} / ${questList.length}`;
+  const winsWord = memoryWins % 10 === 1 && memoryWins % 100 !== 11 ? 'победа' : memoryWins % 10 >= 2 && memoryWins % 10 <= 4 && (memoryWins % 100 < 12 || memoryWins % 100 > 14) ? 'победы' : 'побед';
+  document.querySelector('#memory-stat').textContent = `${memoryWins} ${winsWord}`;
 
-  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2 + puzzleLevels * 20 + questDone * 25;
+  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2 + puzzleLevels * 20 + questDone * 25 + Math.min(memoryWins, 10) * 10;
   const level = Math.floor(xp / 100) + 1;
   const levelXP = xp % 100;
   const ranks = ['Новичок', 'Исследователь', 'Создатель', 'Мастер миров', 'Легенда квартала'];
@@ -106,7 +110,8 @@ function renderProgress() {
     ['◷', 'В своём ритме', 'Заверши фокус-сессию', focus > 0],
     ['⌘', 'Первая связь', 'Пройди первый уровень Signal Shift', puzzleLevels >= 1],
     ['✧', 'Мастер сигнала', 'Пройди все пять уровней', puzzleLevels === 5],
-    ['☑', 'Слово сдержано', 'Выполни первую личную миссию', questDone >= 1]
+    ['☑', 'Слово сдержано', 'Выполни первую личную миссию', questDone >= 1],
+    ['✿', 'Тёплая память', 'Собери первую коллекцию Memory Bloom', memoryWins >= 1]
   ];
   const grid = document.querySelector('#badge-grid');
   grid.replaceChildren();
@@ -124,4 +129,4 @@ function renderProgress() {
 renderProgress();
 window.addEventListener('focus', renderProgress);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) renderProgress(); });
-window.addEventListener('storage', event => { if (event.key === 'ssait-quest-log-v1') renderProgress(); });
+window.addEventListener('storage', event => { if (event.key === 'ssait-quest-log-v1' || event.key === 'ssait-memory-best-v1') renderProgress(); });

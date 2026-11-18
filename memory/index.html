@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12101a">
+  <meta name="description" content="Memory Bloom — спокойная карточная игра на память. Играет офлайн, рекорды остаются в твоём браузере.">
+  <title>Memory Bloom — ssait</title>
+  <link rel="stylesheet" href="../portal.css">
+  <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="ssait — главная"><span class="brand-mark">s<span>.</span></span><span>ssait<span class="brand-slash">/</span></span></a>
+    <nav class="main-nav" aria-label="Основная навигация"><a href="../">Главная</a><a class="active" href="../games/">Игры</a><a href="../tools/">Приложения</a><a href="../profile/">Профиль</a></nav>
+    <div class="top-actions"><span class="offline-pill"><i></i> ИГРА ОФЛАЙН</span><button class="menu-button" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button></div>
+  </header>
+  <main class="memory-shell">
+    <a class="memory-back" href="../games/">← Все игры</a>
+    <section class="memory-hero">
+      <div class="memory-intro"><span class="section-kicker">06 / ТИХАЯ ГОЛОВОЛОМКА</span><h1>Memory <em>Bloom</em></h1><p>Найди пары, открывая по две карточки. Здесь нет спешки — только ты и твоя память.</p></div>
+      <div class="memory-controls"><label for="memory-size">РАЗМЕР ПОЛЯ</label><select id="memory-size"><option value="4">4 × 4 · 8 пар</option><option value="5">4 × 5 · 10 пар</option><option value="6">4 × 6 · 12 пар</option></select><button id="memory-new" type="button">Новая игра <span>↻</span></button></div>
+    </section>
+    <section class="memory-status" aria-label="Статистика игры"><div><small>ХОДЫ</small><b id="memory-moves">0</b></div><i></i><div><small>ВРЕМЯ</small><b id="memory-time">00:00</b></div><i></i><div><small>НАШЁЛ</small><b id="memory-pairs">0 / 8</b></div><i></i><div><small>РЕКОРД</small><b id="memory-record">—</b></div></section>
+    <section class="memory-board-wrap"><div class="memory-board" id="memory-board" aria-label="Карточки для игры"></div><div class="memory-win" id="memory-win" hidden><span>✦</span><b>Все пары нашли друг друга.</b><small id="memory-win-copy">Красивая работа. Хочешь ещё?</small><button id="memory-again" type="button">Ещё один круг ↗</button></div></section>
+    <footer class="memory-foot"><span>ЛИЧНЫЙ РЕКОРД СОХРАНЯЕТСЯ НА ЭТОМ УСТРОЙСТВЕ</span><a href="../profile/">Моя мастерская ↗</a></footer>
+  </main>
+  <script src="../portal.js"></script><script src="memory.js"></script><script src="../offline.js"></script>
+</body>
+</html>
