@@ -54,6 +54,15 @@ function startRun() {
   player.y = floorY - player.height; player.vy = 0; player.jumps = 0;
   state = 'running'; lastFrame = 0;
   stage.classList.add('playing'); overlay.classList.add('hidden');
+  startButton.innerHTML = 'Начать забег <span>↗</span>';
+  updateLabels();
+}
+
+function resumeRun() {
+  if (state !== 'paused') return startRun();
+  state = 'running'; lastFrame = 0;
+  stage.classList.add('playing'); overlay.classList.add('hidden');
+  startButton.innerHTML = 'Начать забег <span>↗</span>';
   updateLabels();
 }
 
@@ -210,12 +219,12 @@ function frame(time) {
   draw(time);
 }
 
-startButton.addEventListener('click', startRun);
+startButton.addEventListener('click', () => state === 'paused' ? resumeRun() : startRun());
 jumpButton.addEventListener('pointerdown', event => { event.preventDefault(); jump(); });
 canvas.addEventListener('pointerdown', event => { if (state !== 'paused') jump(); });
 document.querySelector('#pause-button').addEventListener('click', () => {
   if (state === 'running') { state = 'paused'; overlay.classList.remove('hidden'); eyebrow.textContent = 'ПЕРЕДЫШКА'; title.innerHTML = 'Пауза<span style="color:var(--lime)">.</span>'; copy.textContent = `Дистанция — ${(distance / 12).toFixed(0)} метров. Готов продолжить?`; startButton.innerHTML = 'Продолжить <span>▶</span>'; stage.classList.remove('playing'); }
-  else if (state === 'paused') { state = 'running'; overlay.classList.add('hidden'); stage.classList.add('playing'); startButton.innerHTML = 'Начать забег <span>↗</span>'; }
+  else if (state === 'paused') resumeRun();
 });
 document.querySelector('#sound-toggle').addEventListener('click', event => {
   soundOn = !soundOn; event.currentTarget.textContent = soundOn ? '♫' : '♩'; event.currentTarget.setAttribute('aria-label', soundOn ? 'Звук включён' : 'Звук выключен'); sound(620);
@@ -231,3 +240,4 @@ window.addEventListener('blur', () => input.clear());
 window.addEventListener('resize', resize);
 
 bestLabel.textContent = formatted(best); resize(); requestAnimationFrame(frame);
+
