@@ -12,8 +12,10 @@
   let context;
   let masterGain;
   let layers = {};
+  let crackleBuffer;
   let timerId;
   let stopTimeout;
+  let crackleTimer;
   let sleepDeadline = 0;
 
   function readSettings() {
@@ -85,8 +87,29 @@
 
   function volumeCurve(value, name) {
     const level = value / 100;
-    const ceiling = name === 'wind' ? .32 : .2;
+    const ceiling = name === 'wind' ? .78 : name === 'fire' ? .52 : .68;
     return level === 0 ? 0 : ceiling * level * level;
+  }
+
+  function scheduleCrackle() {
+    if (!context || !layers.fire || !consoleCard.classList.contains('is-playing')) return;
+    if (Number(sliders.fire.value) > 0) {
+      const now = context.currentTime;
+      const duration = .035 + Math.random() * .055;
+      const source = context.createBufferSource();
+      const filter = context.createBiquadFilter();
+      const burst = context.createGain();
+      crackleBuffer ||= makeNoise('white');
+      source.buffer = crackleBuffer;
+      filter.type = 'bandpass'; filter.frequency.value = 1600 + Math.random() * 2300; filter.Q.value = 1.4;
+      burst.gain.setValueAtTime(.0001, now);
+      burst.gain.exponentialRampToValueAtTime(.12 + Math.random() * .22, now + .006);
+      burst.gain.exponentialRampToValueAtTime(.0001, now + duration);
+      source.connect(filter).connect(burst).connect(layers.fire.gain);
+      source.start(now);
+      source.stop(now + duration + .01);
+    }
+    crackleTimer = window.setTimeout(scheduleCrackle, 450 + Math.random() * 1450);
   }
 
   function updateLayer(name, instant = false) {
@@ -119,6 +142,7 @@
 
   function stopAudio() {
     if (!context) return;
+    window.clearTimeout(crackleTimer);
     window.clearTimeout(stopTimeout);
     const now = context.currentTime;
     masterGain.gain.cancelScheduledValues(now);
@@ -164,6 +188,8 @@
       timerId = window.setInterval(updateTimer, 1000);
       updateTimer();
       consoleCard.classList.add('is-playing');
+      window.clearTimeout(crackleTimer);
+      scheduleCrackle();
       toggle.setAttribute('aria-pressed', 'true');
       document.querySelector('#sound-toggle-icon').textContent = 'Ⅱ';
       document.querySelector('#sound-toggle-label').textContent = 'Сделать паузу';
