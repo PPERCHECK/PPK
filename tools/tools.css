@@ -5,3 +5,4 @@
 
 .tool-empty{margin:22px 0;padding:24px;border:1px dashed #ffffff24;border-radius:12px;text-align:center;color:#9d96a6;font-size:10px}
 .tool-search small{font:7px var(--mono);white-space:nowrap;color:#a59dad}.tool-empty[hidden]{display:none}
+.sound-card{background:radial-gradient(circle at 85% 21%,#a6d9d51c,transparent 38%),linear-gradient(145deg,#273433,#1d2427)}.sound-card .studio-icon{background:#a6d9d51c;color:#b6e4df}.sound-card .studio-go{color:#b6e4df}.sound-card-orb{position:absolute;right:20px;top:10px;color:#b6e4df55;font-size:58px;line-height:1;animation:sound-orbit 6s ease-out infinite}@keyframes sound-orbit{0%{opacity:.15;transform:scale(.75)}55%{opacity:.7}100%{opacity:.15;transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){.sound-card-orb{animation:none}}

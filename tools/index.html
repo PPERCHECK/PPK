@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="tools.css">
 </head>
 <body>
-  <header class="bar"><a class="brand" href="../"><b>s<span>.</span></b> ssait<span class="slash">/</span></a><nav><a href="../">Обзор</a><a href="../games/">Игры</a><a href="../chat/">Сообщения</a><a class="active" href="./">Приложения</a></nav><div class="bar-right"><span class="online"><i></i> РАБОТАЕТ ОФЛАЙН</span><button class="avatar" aria-label="Профиль">S</button></div></header>
+  <header class="bar"><a class="brand" href="../"><b>s<span>.</span></b> ssait<span class="slash">/</span></a><nav><a href="../">Обзор</a><a href="../games/">Игры</a><a href="../chat/">Сообщения</a><a class="active" href="./">Приложения</a></nav><div class="bar-right"><span class="online"><i></i> РАБОТАЕТ ОФЛАЙН</span><a class="avatar avatar-link" href="../profile/" aria-label="Мой профиль">S</a></div></header>
   <main class="layout">
     <aside class="rail"><div class="rail-label">РАБОЧЕЕ</div><a class="rail-link" href="../"><span>⌂</span>Главная</a><a class="rail-link" href="../games/"><span>▣</span>Игры</a><a class="rail-link" href="../chat/"><span>◉</span>Мессенджер</a><a class="rail-link selected" href="./"><span>✳</span>Приложения</a><div class="rail-label rail-spaced">ИЗУЧИТЬ</div><a class="rail-link" href="../notes/"><span>▤</span>Журнал</a></aside>
     <section class="content tools-content">
@@ -21,11 +21,12 @@
       <p class="tools-intro">Открой отдельную комнату для дела. Всё работает без сервера, а личные данные остаются в этом браузере.</p>
       <a class="pixel-promo" href="../draw/"><span class="pixel-promo-icon">▦</span><span><small>КОМНАТА ДЛЯ ТВОРЧЕСТВА</small><b>Pixel Studio — рисуй свой пиксельный мир</b></span><span class="pixel-promo-arrow">↗</span></a>
       <div class="tool-directory">
-        <label class="tool-search" for="tool-search"><span>⌕</span><input id="tool-search" type="search" placeholder="Найти приложение…" autocomplete="off"><small id="tool-result-count" aria-live="polite">5 КОМНАТ</small></label>
+        <label class="tool-search" for="tool-search"><span>⌕</span><input id="tool-search" type="search" placeholder="Найти приложение…" autocomplete="off"><small id="tool-result-count" aria-live="polite">6 КОМНАТ</small></label>
         <div class="tool-filters" role="group" aria-label="Фильтр приложений"><button class="tool-filter active" type="button" data-filter="all">Все</button><button class="tool-filter" type="button" data-filter="productive">Дела</button><button class="tool-filter" type="button" data-filter="creative">Творчество</button><button class="tool-filter" type="button" data-filter="personal">Моё</button></div>
         <div class="tool-app-grid" id="tool-app-grid">
           <a class="tool-app-card" data-category="productive" href="../focus/"><span class="tool-app-icon">◷</span><span class="tool-app-arrow">↗</span><small>ФОКУС · ТАЙМЕР</small><b>Поймай свой ритм</b><span>Сессии внимания, короткие паузы и продолжение после перезагрузки.</span></a>
           <a class="tool-app-card" data-category="productive" href="../notepad/"><span class="tool-app-icon">✎</span><span class="tool-app-arrow">↗</span><small>ЛИЧНЫЙ БЛОКНОТ</small><b>Сохрани мысль</b><span>Заметки и планы с автоматическим сохранением на устройстве.</span></a>
+          <a class="tool-app-card" data-category="creative" href="../sound-garden/"><span class="tool-app-icon">♫</span><span class="tool-app-arrow">↗</span><small>ЗВУКОВАЯ КОМНАТА</small><b>Найди тихий угол</b><span>Смешай дождь, ветер и камин — звуки создаются без интернета.</span></a>
           <a class="tool-app-card" data-category="creative" href="../idea-lab/"><span class="tool-app-icon">✳</span><span class="tool-app-arrow">↗</span><small>ГЕНЕРАТОР ИДЕЙ</small><b>Поверни идею</b><span>Новый старт для игры, истории или маленького приложения.</span></a>
           <a class="tool-app-card" data-category="creative" href="../draw/"><span class="tool-app-icon">▦</span><span class="tool-app-arrow">↗</span><small>PIXEL STUDIO</small><b>Нарисуй свой пиксель</b><span>Создай маленький мир и сохрани его как картинку.</span></a>
           <a class="tool-app-card" data-category="personal" href="../quests/"><span class="tool-app-icon">☑</span><span class="tool-app-arrow">↗</span><small>ЛИЧНЫЕ МИССИИ</small><b>Сделай следующий шаг</b><span>Свои задания, идеи и опыт за небольшие победы.</span></a>

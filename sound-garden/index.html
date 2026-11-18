@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141a1a">
+  <meta name="description" content="Собери свой спокойный фон: дождь, ветер и потрескивание огня. Работает офлайн.">
+  <title>Sound Garden — ssait</title>
+  <link rel="stylesheet" href="../portal.css">
+  <link rel="stylesheet" href="../tools/tools.css">
+  <link rel="stylesheet" href="sound-garden.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="../"><b>s<span>.</span></b> ssait<span class="slash">/</span></a>
+    <nav><a href="../">Обзор</a><a href="../games/">Игры</a><a href="../chat/">Сообщения</a><a class="active" href="../tools/">Приложения</a></nav>
+    <div class="bar-right"><span class="online"><i></i> ЗВУК СОЗДАЁТСЯ НА УСТРОЙСТВЕ</span><a class="avatar avatar-link" href="../profile/" aria-label="Мой профиль">S</a></div>
+  </header>
+  <main class="layout">
+    <aside class="rail">
+      <div class="rail-label">РАБОЧЕЕ</div><a class="rail-link" href="../"><span>⌂</span>Главная</a>
+      <a class="rail-link" href="../games/"><span>▣</span>Игры</a><a class="rail-link" href="../chat/"><span>◉</span>Сообщения</a>
+      <a class="rail-link selected" href="../tools/"><span>✳</span>Приложения</a><div class="rail-label rail-spaced">ИЗУЧИТЬ</div><a class="rail-link" href="../notes/"><span>▤</span>Журнал</a>
+    </aside>
+    <section class="content tools-content tool-room sound-room">
+      <a class="tool-crumb" href="../tools/">← Все приложения</a>
+      <div class="eyebrow">ЗВУКОВАЯ КОМНАТА · ОФЛАЙН</div>
+      <h1>Собери свой <span>тихий угол.</span></h1>
+      <p class="tools-intro">Дождь, ветер и огонь — смешай слои под своё настроение. Звуки создаются прямо в браузере, интернет не нужен.</p>
+
+      <section class="sound-console" aria-label="Микшер окружающих звуков">
+        <div class="sound-scene" id="sound-scene" aria-hidden="true">
+          <div class="scene-stars">✦ <span>·</span> ✧ <span>·</span> ✦</div>
+          <div class="scene-window"><div class="window-glow"></div><div class="window-rain"></div><div class="window-sill"></div></div>
+          <div class="scene-mug">☕</div><div class="scene-plant">♧</div>
+          <div class="sound-orbit orbit-a"></div><div class="sound-orbit orbit-b"></div>
+        </div>
+        <div class="sound-console-body">
+          <div class="sound-status-row"><span class="sound-status" id="sound-status" aria-live="polite"><i></i> ПАУЗА</span><span class="sound-caption">ТРИ СЛОЯ · ТВОЙ МИКС</span></div>
+          <div class="sound-layers">
+            <label class="sound-layer" for="rain-level"><span class="layer-icon rain-icon">⌁</span><span class="layer-copy"><b>Дождь</b><small>Мягкий шум за окном</small></span><input id="rain-level" type="range" min="0" max="100" value="42"><output for="rain-level">42%</output></label>
+            <label class="sound-layer" for="wind-level"><span class="layer-icon wind-icon">〰</span><span class="layer-copy"><b>Ветер</b><small>Низкий гул листвы</small></span><input id="wind-level" type="range" min="0" max="100" value="22"><output for="wind-level">22%</output></label>
+            <label class="sound-layer" for="fire-level"><span class="layer-icon fire-icon">♨</span><span class="layer-copy"><b>Камин</b><small>Тихое потрескивание</small></span><input id="fire-level" type="range" min="0" max="100" value="18"><output for="fire-level">18%</output></label>
+          </div>
+          <div class="sound-presets"><span>НАСТРОЕНИЕ</span><button type="button" data-preset="rain">Дождливый вечер</button><button type="button" data-preset="cabin">У камина</button><button type="button" data-preset="wind">Лес после дождя</button></div>
+          <div class="sound-controls">
+            <button type="button" class="sound-play" id="sound-toggle" aria-pressed="false"><span id="sound-toggle-icon">▶</span><span id="sound-toggle-label">Включить звуки</span></button>
+            <label class="master-volume" for="master-level"><span>ОБЩАЯ ГРОМКОСТЬ</span><input id="master-level" type="range" min="0" max="100" value="70"></label>
+          </div>
+          <div class="sleep-row"><label for="sleep-timer">ТАЙМЕР ТИШИНЫ</label><select id="sleep-timer"><option value="0">Без таймера</option><option value="15">15 минут</option><option value="30">30 минут</option><option value="60">1 час</option></select><span id="sleep-remaining" aria-live="polite">Звуки отключены</span></div>
+        </div>
+      </section>
+      <p class="sound-note"><span>◉</span> Первый запуск звука требует нажатия. Уровни и последний микс сохраняются только в этом браузере.</p>
+    </section>
+  </main>
+  <footer class="tool-page-footer"><span>РАБОТАЕТ ОФЛАЙН · ЗВУК СИНТЕЗИРУЕТСЯ НА УСТРОЙСТВЕ</span><a href="../profile/">Мой профиль ↗</a></footer>
+  <script src="../portal.js"></script><script src="sound-garden.js"></script><script src="../offline.js"></script>
+</body>
+</html>
