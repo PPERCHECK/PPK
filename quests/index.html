@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12101a">
+  <meta name="description" content="Локальный журнал миссий ssait. Собирай игровые и творческие задания без аккаунта и сервера.">
+  <title>Мои миссии — ssait</title>
+  <link rel="stylesheet" href="../portal.css">
+  <link rel="stylesheet" href="quests.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="ssait — главная"><span class="brand-mark">s<span>.</span></span><span>ssait<span class="brand-slash">/</span></span></a>
+    <nav class="main-nav" aria-label="Основная навигация"><a href="../">Главная</a><a href="../games/">Игры</a><a class="active" href="./">Миссии</a><a href="../profile/">Профиль</a></nav>
+    <div class="top-actions"><span class="offline-pill"><i></i> ЛИЧНЫЙ ЖУРНАЛ</span><button class="menu-button" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button></div>
+  </header>
+  <main class="quest-shell">
+    <section class="quest-hero"><div class="quest-glow"></div><div class="quest-intro"><span class="section-kicker">ЗАДАНИЯ МАСТЕРСКОЙ · ОФЛАЙН</span><h1>Маленький шаг.<br><em>Большой мир.</em></h1><p>Собирай игровые, творческие и обычные дела в одном месте. Выполненное задание приносит опыт.</p></div><div class="quest-score"><span class="quest-spark">✦</span><small>ОПЫТ МАСТЕРСКОЙ</small><b id="quest-xp">0 <i>XP</i></b><span id="quest-profile-name">Искатель 47</span></div></section>
+    <section class="quest-layout">
+      <div class="quest-main">
+        <div class="quest-list-head"><div><span class="section-kicker">ТВОЙ СПИСОК</span><h2>Что сделаем?</h2></div><div class="quest-count"><span><b id="active-count">0</b> активно</span><i></i><span><b id="done-count">0</b> готово</span></div></div>
+        <form class="quest-form" id="quest-form"><label class="sr-only" for="quest-input">Новое задание</label><span class="quest-plus">＋</span><input id="quest-input" maxlength="80" placeholder="Добавь свою миссию…" autocomplete="off"><button type="submit">Добавить <span>↗</span></button></form>
+        <div class="quest-filters" role="group" aria-label="Фильтр заданий"><button class="active" type="button" data-filter="all">Все</button><button type="button" data-filter="active">В процессе</button><button type="button" data-filter="done">Готово</button><button class="suggest-button" id="suggest-button" type="button">Идея миссии ✳</button></div>
+        <ul class="quest-list" id="quest-list" aria-live="polite"></ul>
+        <div class="quest-empty" id="quest-empty" hidden><span>✳</span><b>Пока здесь тихо.</b><small>Добавь миссию или выбери идею сверху.</small></div>
+      </div>
+      <aside class="quest-aside"><div class="week-card"><span class="section-kicker">ПРОГРЕСС</span><div class="week-number"><b id="rewarded-count">0</b><span>миссий<br>выполнено</span></div><div class="week-track"><i id="week-fill"></i></div><small id="week-hint">Начни с одного небольшого шага.</small></div><div class="quest-tips"><span class="tip-icon">◉</span><b>Только твой браузер</b><p>Задания и полученный опыт не отправляются на сервер.</p><a href="../profile/">Открыть профиль ↗</a></div></aside>
+    </section>
+  </main>
+  <footer class="site-footer quest-footer"><a class="brand footer-brand" href="../"><span class="brand-mark">s<span>.</span></span><span>ssait<span class="brand-slash">/</span></span></a><span>ЗАДАНИЯ СОХРАНЯЮТСЯ НА ЭТОМ УСТРОЙСТВЕ</span><a href="../games/">Выбрать игру ↗</a></footer>
+  <div class="quest-toast" id="quest-toast" role="status" aria-live="polite"></div>
+  <script src="../portal.js"></script><script src="quests.js"></script><script src="../offline.js"></script>
+</body>
+</html>

@@ -71,6 +71,9 @@ function renderProgress() {
   const puzzleLevels = Object.keys(puzzleBest).filter(level => Number(level) >= 1 && Number(level) <= 5 && Number(puzzleBest[level]) > 0).length;
   const notes = readJSON('ssait-workshop-notes-v1', []);
   const noteCount = Array.isArray(notes) ? notes.length : 0;
+  const quests = readJSON('ssait-quest-log-v1', []);
+  const questList = Array.isArray(quests) ? quests : [];
+  const questDone = questList.filter(task => task?.done).length;
 
   document.querySelector('#signals-stat').textContent = `${signals.length} / 3`;
   document.querySelector('#runner-stat').textContent = `${Math.floor(runner / 12)} м`;
@@ -80,8 +83,9 @@ function renderProgress() {
   document.querySelector('#art-stat').textContent = hasArt ? 'Готово ✳' : 'Пока пусто';
   document.querySelector('#puzzle-stat').textContent = `${puzzleLevels} / 5`;
   document.querySelector('#notes-stat').textContent = String(noteCount);
+  document.querySelector('#quests-stat').textContent = `${questDone} / ${questList.length}`;
 
-  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2 + puzzleLevels * 20;
+  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2 + puzzleLevels * 20 + questDone * 25;
   const level = Math.floor(xp / 100) + 1;
   const levelXP = xp % 100;
   const ranks = ['Новичок', 'Исследователь', 'Создатель', 'Мастер миров', 'Легенда квартала'];
@@ -101,7 +105,8 @@ function renderProgress() {
     ['▦', 'Пиксельный автор', 'Сохрани свой рисунок', hasArt],
     ['◷', 'В своём ритме', 'Заверши фокус-сессию', focus > 0],
     ['⌘', 'Первая связь', 'Пройди первый уровень Signal Shift', puzzleLevels >= 1],
-    ['✧', 'Мастер сигнала', 'Пройди все пять уровней', puzzleLevels === 5]
+    ['✧', 'Мастер сигнала', 'Пройди все пять уровней', puzzleLevels === 5],
+    ['☑', 'Слово сдержано', 'Выполни первую личную миссию', questDone >= 1]
   ];
   const grid = document.querySelector('#badge-grid');
   grid.replaceChildren();
@@ -119,3 +124,4 @@ function renderProgress() {
 renderProgress();
 window.addEventListener('focus', renderProgress);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) renderProgress(); });
+window.addEventListener('storage', event => { if (event.key === 'ssait-quest-log-v1') renderProgress(); });
