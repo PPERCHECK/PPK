@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111822">
+  <meta name="description" content="Signal Shift — офлайн-головоломка. Поворачивай детали цепи и восстанови связь.">
+  <title>Signal Shift — ssait</title>
+  <link rel="stylesheet" href="../portal.css">
+  <link rel="stylesheet" href="puzzle.css">
+</head>
+<body>
+  <header class="shift-header">
+    <a class="back-link" href="../">← <span>В МАСТЕРСКУЮ</span></a>
+    <a class="shift-wordmark" href="./"><span>✳</span> SIGNAL <b>SHIFT</b></a>
+    <span class="shift-offline"><i></i> ОФЛАЙН</span>
+  </header>
+  <main class="shift-layout">
+    <aside class="shift-info">
+      <span class="shift-kicker">ГОЛОВОЛОМКА · 05</span>
+      <h1>Верни<br><em>связь.</em></h1>
+      <p>Поворачивай детали цепи, чтобы соединить маяк с выходом. Каждый уровень — новый маршрут.</p>
+      <div class="shift-mission"><span class="mission-source">✦</span><span class="mission-dash"></span><span class="mission-target">↗</span><div><b>ОТ МАЯКА</b><small>до выхода</small></div></div>
+      <div class="level-picker"><div class="picker-heading"><span>УРОВНИ</span><b id="unlock-status">01 / 05 ОТКРЫТО</b></div><div class="level-buttons" id="level-buttons"></div></div>
+      <div class="shift-best"><span>РЕКОРД ЭТОГО УРОВНЯ</span><b id="best-moves">—</b></div>
+      <a class="shift-next" href="../games/">В игровой зал <span>↗</span></a>
+    </aside>
+
+    <section class="shift-game" aria-label="Игровая доска Signal Shift">
+      <div class="board-top"><div><span class="section-kicker">МАРШРУТ <b id="level-label">01</b></span><h2 id="level-title">Первый контакт</h2></div><div class="move-counter"><small>ХОДЫ</small><b id="move-count">00</b></div></div>
+      <div class="board-frame">
+        <div class="board-meta"><span><i class="signal-live"></i> СИГНАЛ НЕ НАЙДЕН</span><span id="tile-hint">НАЖМИ НА ДЕТАЛЬ, ЧТОБЫ ПОВЕРНУТЬ</span></div>
+        <div class="circuit-board" id="circuit-board" role="group" aria-label="Сетка соединений 5 на 5"></div>
+        <div class="board-caption"><span>✦ СТАРТ</span><span class="caption-center">СОБЕРИ ЦЕПОЧКУ</span><span>ФИНИШ ↗</span></div>
+      </div>
+      <div class="shift-actions"><button id="hint-button" class="shift-button button-soft" type="button">Подсказка <span>◉</span></button><button id="reset-button" class="shift-button button-soft" type="button">Заново <span>↻</span></button><button id="next-button" class="shift-button button-next" type="button" hidden>Следующий уровень <span>↗</span></button></div>
+      <div class="shift-message" id="shift-message" role="status" aria-live="polite">Найди дорогу от маяка к выходу.</div>
+    </section>
+  </main>
+  <footer class="shift-footer"><span>СОХРАНЕНИЕ И РЕКОРДЫ — ТОЛЬКО В ЭТОМ БРАУЗЕРЕ</span><a href="../profile/">Мой профиль ↗</a></footer>
+  <script src="puzzle.js"></script><script src="../offline.js"></script>
+</body>
+</html>

@@ -66,6 +66,9 @@ function renderProgress() {
   const blocks = Array.isArray(build?.placed) ? build.placed.length : 0;
   const pixel = readJSON('ssait-pixel-studio-v1', []);
   const hasArt = Array.isArray(pixel) && pixel.some(Boolean);
+  const puzzle = readJSON('ssait-signal-shift-v1', { best: {} });
+  const puzzleBest = puzzle?.best && typeof puzzle.best === 'object' ? puzzle.best : {};
+  const puzzleLevels = Object.keys(puzzleBest).filter(level => Number(level) >= 1 && Number(level) <= 5 && Number(puzzleBest[level]) > 0).length;
   const notes = readJSON('ssait-workshop-notes-v1', []);
   const noteCount = Array.isArray(notes) ? notes.length : 0;
 
@@ -75,8 +78,10 @@ function renderProgress() {
   document.querySelector('#blocks-stat').textContent = String(blocks);
   document.querySelector('#focus-stat').textContent = String(focus);
   document.querySelector('#art-stat').textContent = hasArt ? 'Готово ✳' : 'Пока пусто';
+  document.querySelector('#puzzle-stat').textContent = `${puzzleLevels} / 5`;
+  document.querySelector('#notes-stat').textContent = String(noteCount);
 
-  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2;
+  const xp = focus * 20 + signals.length * 25 + Math.floor(Math.min(runner, 5000) / 100) + (drift ? 40 : 0) + Math.min(blocks, 30) * 2 + (hasArt ? 25 : 0) + Math.min(noteCount, 10) * 2 + puzzleLevels * 20;
   const level = Math.floor(xp / 100) + 1;
   const levelXP = xp % 100;
   const ranks = ['Новичок', 'Исследователь', 'Создатель', 'Мастер миров', 'Легенда квартала'];
@@ -94,7 +99,9 @@ function renderProgress() {
     ['◌', 'Первый занос', 'Заверши гонку Drift Box', drift > 0],
     ['▧', 'Свой архитектор', 'Поставь 25 блоков', blocks >= 25],
     ['▦', 'Пиксельный автор', 'Сохрани свой рисунок', hasArt],
-    ['◷', 'В своём ритме', 'Заверши фокус-сессию', focus > 0]
+    ['◷', 'В своём ритме', 'Заверши фокус-сессию', focus > 0],
+    ['⌘', 'Первая связь', 'Пройди первый уровень Signal Shift', puzzleLevels >= 1],
+    ['✧', 'Мастер сигнала', 'Пройди все пять уровней', puzzleLevels === 5]
   ];
   const grid = document.querySelector('#badge-grid');
   grid.replaceChildren();

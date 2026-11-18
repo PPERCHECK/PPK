@@ -1,13 +1,13 @@
 const CACHE = 'ssait-shell-v2';
 const FILES = [
   './', './index.html', './games/', './chat/', './tools/', './notes/', './projects/',
-  './game/', './crafting/', './drift/', './runner/', './draw/', './profile/',
+  './game/', './crafting/', './drift/', './runner/', './draw/', './profile/', './puzzle/',
   './portal.css', './portal.js', './offline.js', './favicon.svg', './manifest.webmanifest',
   './assets/ssait-worlds.jpg', './vendor/three.module.js', './vendor/three.core.js', './vendor/THREE-LICENSE.txt',
   './chat/chat.css', './chat/chat.js', './tools/tools.css', './tools/tools.js',
   './game/game.css', './game/game.js', './crafting/craft.css', './crafting/craft.js',
   './drift/drift.css', './drift/drift.js', './runner/runner.css', './runner/runner.js',
-  './draw/draw.css', './draw/draw.js', './profile/profile.css', './profile/profile.js', './games/games.css', './games/games.js'
+  './draw/draw.css', './draw/draw.js', './profile/profile.css', './profile/profile.js', './puzzle/puzzle.css', './puzzle/puzzle.js', './games/games.css', './games/games.js'
 ];
 
 self.addEventListener('install', event => {
@@ -40,4 +40,5 @@ self.addEventListener('fetch', event => {
     return response;
   })));
 });
+
 

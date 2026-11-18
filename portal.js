@@ -16,7 +16,7 @@ mainNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', ()
 
 const resumeLink = document.querySelector('#resume-room');
 if (resumeLink) {
-  const allowedRooms = new Set(['game/', 'crafting/', 'drift/', 'runner/', 'draw/']);
+  const allowedRooms = new Set(['game/', 'crafting/', 'drift/', 'runner/', 'draw/', 'puzzle/']);
   try {
     const lastRoom = JSON.parse(localStorage.getItem('ssait-last-room') || 'null');
     if (lastRoom && allowedRooms.has(lastRoom.href)) {
@@ -27,7 +27,7 @@ if (resumeLink) {
   } catch {}
 }
 
-const homeLinks = document.querySelectorAll('a[href="game/"],a[href="crafting/"],a[href="drift/"],a[href="runner/"],a[href="draw/"]');
+const homeLinks = document.querySelectorAll('a[href="game/"],a[href="crafting/"],a[href="drift/"],a[href="runner/"],a[href="draw/"],a[href="puzzle/"]');
 homeLinks.forEach(link => link.addEventListener('click', () => {
   try { localStorage.setItem('ssait-last-room', JSON.stringify({ href: link.getAttribute('href'), title: link.querySelector('h3')?.textContent || link.textContent.trim(), at: Date.now() })); } catch {}
 }));
