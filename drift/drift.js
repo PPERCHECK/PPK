@@ -53,4 +53,3 @@ function paint(now){
  ctx.save();ctx.translate(carX,carY);ctx.rotate(heading+Math.PI/2);ctx.fillStyle='#12151055';ctx.fillRect(-14,-2,30,16);ctx.fillStyle=drifting?'#e9906c':'#d4ed82';ctx.beginPath();ctx.moveTo(0,-18);ctx.lineTo(11,-7);ctx.lineTo(10,14);ctx.lineTo(-10,14);ctx.lineTo(-11,-7);ctx.closePath();ctx.fill();ctx.fillStyle='#4e6254';ctx.fillRect(-7,-7,14,9);ctx.fillStyle='#fff0be';ctx.fillRect(-9,-17,5,3);ctx.fillRect(4,-17,5,3);ctx.restore();
 }
 resize();requestAnimationFrame(paint);
-

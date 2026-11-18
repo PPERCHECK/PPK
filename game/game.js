@@ -139,4 +139,3 @@ setInterval(()=>{const t=new Date();document.querySelector('#clock').textContent
 document.querySelector('#sound').addEventListener('click',()=>showToast('Звук города появится в следующем обновлении.'));
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.65))});
 requestAnimationFrame(frame);
-

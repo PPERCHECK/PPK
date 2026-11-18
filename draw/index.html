@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12101a"><meta name="description" content="Pixel Studio — офлайн-редактор пиксельных рисунков с локальным сохранением.">
+  <title>Pixel Studio — ssait</title><link rel="stylesheet" href="draw.css">
+</head>
+<body>
+  <header class="draw-header"><a class="back" href="../">← <span>В МАСТЕРСКУЮ</span></a><div class="draw-brand"><span>▦</span> PIXEL <b>STUDIO</b><small>РИСУЙ · СОХРАНЯЙ · ДЕЛИСЬ</small></div><a class="header-link" href="../tools/">Инструменты ↗</a></header>
+  <main class="draw-app">
+    <section class="draw-intro"><div class="draw-kicker">ТВОРЧЕСКАЯ КОМНАТА <span>02</span></div><h1>Крошечный холст.<br><em>Большие идеи.</em></h1><p>Собери свой маленький пиксельный мир. Рисунок остаётся у тебя в браузере.</p><div class="presets"><span>БЫСТРЫЙ СТАРТ</span><button data-preset="star">✦ звезда</button><button data-preset="house">⌂ домик</button><button data-preset="heart">♥ сердце</button></div></section>
+    <section class="editor" aria-label="Редактор пиксельных рисунков">
+      <div class="editor-top"><div><span class="save-dot"></span><b>Мой рисунок</b><small id="save-state">сохранён на устройстве</small></div><div class="editor-actions"><button id="undo" title="Отменить">↶</button><button id="redo" title="Повторить">↷</button><button id="clear" title="Очистить холст">Очистить</button><button id="export">Скачать PNG <span>↓</span></button></div></div>
+      <div class="editor-main">
+        <div class="canvas-wrap"><div class="canvas-label"><span>32 × 32 PX</span><span id="coord">x: — · y: —</span></div><div class="pixel-paper"><canvas id="pixel-canvas" width="32" height="32" aria-label="Пиксельный холст 32 на 32"></canvas></div><div class="canvas-foot"><span>ЛКМ рисовать · ПКМ стирать</span><span>АВТОСОХРАНЕНИЕ ВКЛ.</span></div></div>
+        <aside class="palette-panel"><div class="palette-title"><span>ПАЛИТРА</span><small id="color-name">Лайм</small></div><div class="palette" id="palette"></div><div class="tool-label">ИНСТРУМЕНТЫ</div><div class="tools"><button class="tool active" data-tool="pen"><span>✎</span> Кисть <kbd>B</kbd></button><button class="tool" data-tool="fill"><span>▨</span> Заливка <kbd>F</kbd></button><button class="tool" data-tool="eraser"><span>⌫</span> Ластик <kbd>E</kbd></button></div><div class="size-setting"><label for="brush-size">Размер кисти <b id="brush-label">1 px</b></label><input id="brush-size" type="range" min="1" max="5" value="1"></div><div class="palette-tip"><span>✳</span> Нажми и тяни мышь, чтобы рисовать непрерывно.</div></aside>
+      </div>
+    </section>
+    <footer class="draw-footer"><span>PIXEL STUDIO <i>·</i> ОФЛАЙН-ИНСТРУМЕНТ</span><a href="../games/">Вернуться в игровой зал ↗</a></footer>
+  </main>
+  <script src="draw.js"></script><script src="../offline.js"></script>
+</body>
+</html>
+
+
