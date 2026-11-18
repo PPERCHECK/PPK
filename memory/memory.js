@@ -15,6 +15,7 @@ let pairs = 0;
 let elapsed = 0;
 let startedAt = 0;
 let ticker = null;
+let flipTimer = null;
 let records = readRecords();
 
 function readRecords() {
@@ -36,7 +37,7 @@ function shuffle(items) {
   return items;
 }
 function startGame() {
-  clearInterval(ticker); first = null; locked = false; moves = 0; pairs = 0; elapsed = 0; startedAt = 0; winPanel.hidden = true; board.replaceChildren();
+  clearInterval(ticker); clearTimeout(flipTimer); flipTimer = null; first = null; locked = false; moves = 0; pairs = 0; elapsed = 0; startedAt = 0; winPanel.hidden = true; board.replaceChildren();
   const pairCount = Number(sizeSelect.value) * 2;
   const deck = shuffle([...symbols.slice(0, pairCount), ...symbols.slice(0, pairCount)]);
   for (const [index, symbol] of deck.entries()) {
@@ -59,7 +60,8 @@ function flip(card) {
     return;
   }
   const previous = first; first = null; locked = true; updateStats();
-  setTimeout(() => {
+  flipTimer = setTimeout(() => {
+    flipTimer = null;
     for (const item of [previous, card]) { item.classList.remove('open'); item.textContent = ''; item.setAttribute('aria-label', `Карточка ${[...board.children].indexOf(item) + 1}, закрыта`); }
     locked = false;
   }, 750);
@@ -76,5 +78,5 @@ function finish() {
 document.querySelector('#memory-new').addEventListener('click', startGame);
 document.querySelector('#memory-again').addEventListener('click', startGame);
 sizeSelect.addEventListener('change', startGame);
-window.addEventListener('pagehide', () => clearInterval(ticker));
+window.addEventListener('pagehide', () => { clearInterval(ticker); clearTimeout(flipTimer); });
 startGame();
