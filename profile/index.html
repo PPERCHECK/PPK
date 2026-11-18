@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#12101a">
+  <meta name="description" content="Твой локальный профиль игровой мастерской ssait — ник, рекорды и достижения без регистрации.">
+  <title>Мой профиль — ssait</title>
+  <link rel="stylesheet" href="../portal.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="ssait — главная"><span class="brand-mark">s<span>.</span></span><span>ssait<span class="brand-slash">/</span></span></a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="../">Главная</a><a href="../games/">Игры</a><a href="../tools/">Приложения</a><a class="active" href="./">Профиль</a>
+    </nav>
+    <div class="top-actions"><span class="offline-pill"><i></i> СОХРАНЕНО У ТЕБЯ</span><button class="menu-button" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button></div>
+  </header>
+  <main class="profile-shell">
+    <section class="profile-hero">
+      <div class="profile-orbit orbit-one"></div><div class="profile-orbit orbit-two"></div>
+      <div class="profile-intro"><span class="section-kicker">ПАСПОРТ МАСТЕРСКОЙ · ОФЛАЙН</span><h1>Твоя история<br><em>в мастерской.</em></h1><p>Рекорды, постройки и маленькие победы. Они остаются на этом устройстве.</p><div class="profile-greeting"><span id="profile-display-avatar">🚀</span><b id="profile-display-name">Искатель 47</b></div></div>
+      <div class="profile-rank"><span class="rank-star">✦</span><small>ТЕКУЩИЙ УРОВЕНЬ</small><b id="level-number">01</b><span id="rank-name">Новичок</span></div>
+      <div class="profile-xp"><div class="xp-label"><span>ОПЫТ</span><b id="xp-label">0 / 100 XP</b></div><div class="xp-track"><i id="xp-fill"></i></div><small id="xp-next">До следующего уровня — 100 XP</small></div>
+    </section>
+
+    <section class="profile-columns">
+      <article class="profile-panel identity-panel">
+        <div class="panel-heading"><div><span class="section-kicker">01 / ТВОЙ ПЕРСОНАЖ</span><h2>Познакомимся?</h2></div><span class="panel-mark">✳</span></div>
+        <form id="profile-form">
+          <div class="avatar-preview" id="avatar-preview" aria-live="polite">🚀</div>
+          <label class="field-label" for="profile-name">ТВОЙ НИК</label>
+          <input id="profile-name" name="nickname" maxlength="18" autocomplete="nickname" placeholder="Искатель 47">
+          <span class="field-label avatar-label">ВЫБЕРИ ЗНАЧОК</span>
+          <div class="avatar-picks" id="avatar-picks" role="group" aria-label="Выбери аватар">
+            <button type="button" data-avatar="🚀" aria-label="Ракета">🚀</button><button type="button" data-avatar="🦊" aria-label="Лиса">🦊</button><button type="button" data-avatar="🐸" aria-label="Лягушка">🐸</button><button type="button" data-avatar="🐙" aria-label="Осьминог">🐙</button><button type="button" data-avatar="👾" aria-label="Пришелец">👾</button><button type="button" data-avatar="🐼" aria-label="Панда">🐼</button>
+          </div>
+          <button class="profile-save" type="submit">Сохранить профиль <span>↗</span></button>
+        </form>
+        <p class="privacy-note"><span>◉</span> Без аккаунта и сервера. Это имя видно только тебе.</p>
+      </article>
+
+      <section class="profile-panel stats-panel" aria-labelledby="stats-title">
+        <div class="panel-heading"><div><span class="section-kicker">02 / ТВОИ МИРЫ</span><h2 id="stats-title">Что уже удалось</h2></div><a class="text-link" href="../games/">Играть ↗</a></div>
+        <div class="profile-stats">
+          <article class="stat-tile stat-city"><span>✦</span><small>СИГНАЛЫ BEBLOX</small><b id="signals-stat">0 / 3</b><i>помогли городу</i></article>
+          <article class="stat-tile stat-run"><span>↗</span><small>НОЧНОЙ ЗАБЕГ</small><b id="runner-stat">0 м</b><i>лучший результат</i></article>
+          <article class="stat-tile stat-drift"><span>◌</span><small>DRIFT BOX</small><b id="drift-stat">—</b><i>личный рекорд</i></article>
+          <article class="stat-tile stat-build"><span>▧</span><small>БЛОКИ CRAFTING</small><b id="blocks-stat">0</b><i>своих блоков</i></article>
+          <article class="stat-tile stat-focus"><span>◷</span><small>ФОКУС-СЕССИИ</small><b id="focus-stat">0</b><i>завершено</i></article>
+          <article class="stat-tile stat-art"><span>▦</span><small>PIXEL STUDIO</small><b id="art-stat">Пока пусто</b><i>твой рисунок</i></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="profile-panel achievements-panel">
+      <div class="panel-heading"><div><span class="section-kicker">03 / НЕБОЛЬШИЕ ПОБЕДЫ</span><h2>Коллекция значков</h2></div><span class="badge-count"><b id="badge-count">0</b> / 8 ОТКРЫТО</span></div>
+      <div class="badge-grid" id="badge-grid"></div>
+    </section>
+    <div class="profile-foot"><span>ДАННЫЕ ХРАНЯТСЯ В LOCALSTORAGE ЭТОГО БРАУЗЕРА</span><a href="../">← Вернуться в мастерскую</a></div>
+  </main>
+  <div class="profile-toast" id="profile-toast" role="status" aria-live="polite"></div>
+  <footer class="site-footer profile-footer"><a class="brand footer-brand" href="../"><span class="brand-mark">s<span>.</span></span><span>ssait<span class="brand-slash">/</span></span></a><span>БЕЗ РЕГИСТРАЦИИ <i>·</i> ТОЛЬКО НА ЭТОМ УСТРОЙСТВЕ</span><a href="../notes/">Журнал ↗</a></footer>
+  <script src="../portal.js"></script><script src="profile.js"></script><script src="../offline.js"></script>
+</body>
+</html>
