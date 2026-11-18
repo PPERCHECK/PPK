@@ -86,12 +86,12 @@ const headlightMat=new THREE.MeshStandardMaterial({color:'#fff1ba',emissive:'#ef
 const tailMat=new THREE.MeshStandardMaterial({color:'#a74236',emissive:'#78221a',emissiveIntensity:.6});for(const z of [-.7,.7])box(car,-2.06,.72,z,.04,.22,.42,tailMat);
 
 // Three collectible city signals turn free roaming into a simple first mission.
-const signals=[];let collectedSignals=0;
-for(const [x,z] of [[0,-58],[58,0],[0,58]]){
+const signals=[],signalStorage='ssait-beblox-signals-v1';let collectedSignals=0,foundSignals=[];try{const saved=JSON.parse(localStorage.getItem(signalStorage)||'[]');if(Array.isArray(saved))foundSignals=saved.filter(Number.isInteger)}catch{}
+for(const [index,[x,z]] of [[0,-58],[58,0],[0,58]].entries()){
  const marker=new THREE.Group();marker.position.set(x,1.45,z);scene.add(marker);
  const gem=new THREE.Mesh(new THREE.OctahedronGeometry(.55,0),new THREE.MeshStandardMaterial({color:'#c9ec74',emissive:'#8ab83a',emissiveIntensity:1.7,metalness:.35,roughness:.22}));gem.castShadow=true;marker.add(gem);
  const halo=new THREE.Mesh(new THREE.TorusGeometry(.86,.035,6,32),new THREE.MeshBasicMaterial({color:'#ddff8f',transparent:true,opacity:.75}));halo.rotation.x=Math.PI/2;marker.add(halo);
- const beam=new THREE.PointLight('#d5ff8b',8,9,2);marker.add(beam);signals.push(marker);
+ const beam=new THREE.PointLight('#d5ff8b',8,9,2);marker.add(beam);marker.visible=!foundSignals.includes(index);if(!marker.visible)collectedSignals++;signals.push(marker);
 }
 
 // World-space camera follows walking and driving. Drag to look around; click to capture pointer.
@@ -109,7 +109,7 @@ document.addEventListener('mousemove',e=>{if(!locked)return;yaw-=e.movementX*.00
 document.addEventListener('keydown',e=>{const k=e.key.toLowerCase();keys.add(k);if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();if(k==='e')interact();if(k==='escape'&&document.pointerLockElement)document.exitPointerLock()});
 document.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
 for(const b of document.querySelectorAll('.mobile-controls button')){const k=b.dataset.key;b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(k);if(k==='e')interact()});for(const event of ['pointerup','pointercancel','pointerleave'])b.addEventListener(event,()=>keys.delete(k))}
-function interact(){const actor=driving?car:player;const nearby=signals.findIndex(s=>s.visible&&actor.position.distanceTo(s.position)<5);if(nearby>=0){signals[nearby].visible=false;collectedSignals++;playTone(collectedSignals===3?880:660);if(collectedSignals===3)setTimeout(()=>playTone(1040),140);showToast(collectedSignals===3?'Миссия выполнена! Ты нашёл все сигналы.':'Сигнал найден · '+collectedSignals+' / 3');return}if(driving){driving=false;player.position.copy(car.position).add(new THREE.Vector3(0,0,3));player.visible=true;document.querySelector('#speedometer').classList.remove('show');document.querySelector('#gear').textContent='WALK';playTone(330);showToast('Ты вышел из машины. Осмотрись вокруг.')}else if(player.position.distanceTo(car.position)<6){driving=true;player.visible=false;document.querySelector('#speedometer').classList.add('show');playTone(190,.2);showToast('Машина заведена. Хорошей дороги!')}else showToast('Подойди ближе к машине или светящемуся сигналу.')}
+function interact(){const actor=driving?car:player;const nearby=signals.findIndex(s=>s.visible&&actor.position.distanceTo(s.position)<5);if(nearby>=0){signals[nearby].visible=false;collectedSignals++;foundSignals.push(nearby);try{localStorage.setItem(signalStorage,JSON.stringify(foundSignals))}catch{}playTone(collectedSignals===3?880:660);if(collectedSignals===3)setTimeout(()=>playTone(1040),140);showToast(collectedSignals===3?'Миссия выполнена! Ты нашёл все сигналы.':'Сигнал найден · '+collectedSignals+' / 3');return}if(driving){driving=false;player.position.copy(car.position).add(new THREE.Vector3(0,0,3));player.visible=true;document.querySelector('#speedometer').classList.remove('show');document.querySelector('#gear').textContent='WALK';playTone(330);showToast('Ты вышел из машины. Осмотрись вокруг.')}else if(player.position.distanceTo(car.position)<6){driving=true;player.visible=false;document.querySelector('#speedometer').classList.add('show');playTone(190,.2);showToast('Машина заведена. Хорошей дороги!')}else showToast('Подойди ближе к машине или светящемуся сигналу.')}
 function collides(pos){for(const b of buildingBoxes){if(pos.x>b.min.x-1&&pos.x<b.max.x+1&&pos.z>b.min.z-1&&pos.z<b.max.z+1)return true}return false}
 const vForward=new THREE.Vector3(),vRight=new THREE.Vector3(),next=new THREE.Vector3();
 function update(dt){
