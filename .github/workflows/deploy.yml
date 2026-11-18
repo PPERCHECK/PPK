@@ -25,6 +25,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Version offline cache
+        run: sed -i "s/ssait-shell-v[0-9]\+/ssait-shell-${GITHUB_SHA}/g" sw.js
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:

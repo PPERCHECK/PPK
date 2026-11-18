@@ -1,4 +1,4 @@
-const CACHE = 'ssait-shell-v1';
+const CACHE = 'ssait-shell-v2';
 const FILES = [
   './', './index.html', './games/', './chat/', './tools/', './notes/', './projects/',
   './game/', './crafting/', './drift/', './runner/', './draw/',
