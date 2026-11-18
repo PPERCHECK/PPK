@@ -23,7 +23,7 @@ let toastTimer;
 function readTasks() {
   try {
     const stored = JSON.parse(localStorage.getItem(KEY));
-    return Array.isArray(stored) ? stored.filter(task => task && typeof task.title === 'string').map(task => ({ id: String(task.id), title: task.title.slice(0, 80), done: Boolean(task.done), created: Number(task.created) || Date.now() })) : starter;
+    return Array.isArray(stored) ? stored.filter(task => task && typeof task.title === 'string').map(task => ({ id: String(task.id), title: task.title.slice(0, 80), done: Boolean(task.done), created: Number(task.created) || Date.now(), completedAt: Number(task.completedAt) || 0 })) : starter;
   } catch { return starter; }
 }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(tasks)); } catch { showToast('Браузер не разрешил сохранить список'); } }
@@ -38,20 +38,22 @@ function render() {
   const done = tasks.filter(task => task.done).length;
   const active = tasks.length - done;
   const xp = done * 25;
+  const weekStart = new Date(); weekStart.setHours(0, 0, 0, 0); weekStart.setDate(weekStart.getDate() - (weekStart.getDay() + 6) % 7);
+  const weekDone = tasks.filter(task => task.done && task.completedAt >= weekStart.getTime()).length;
   document.querySelector('#active-count').textContent = active;
   document.querySelector('#done-count').textContent = done;
-  document.querySelector('#rewarded-count').textContent = done;
+  document.querySelector('#rewarded-count').textContent = weekDone;
   document.querySelector('#quest-xp').innerHTML = `${xp} <i>XP</i>`;
-  const fill = Math.min(100, done / 5 * 100);
+  const fill = Math.min(100, weekDone / 5 * 100);
   document.querySelector('#week-fill').style.width = `${fill}%`;
-  document.querySelector('#week-hint').textContent = done >= 5 ? 'Пять маленьких побед — уже большая серия!' : `Ещё ${5 - done} ${taskWord(5 - done)} до цели: 5 выполненных миссий.`;
+  document.querySelector('#week-hint').textContent = weekDone >= 5 ? 'Пять маленьких побед — уже большая серия!' : `Ещё ${5 - weekDone} ${taskWord(5 - weekDone)} до цели: 5 выполненных миссий.`;
   try { document.querySelector('#quest-profile-name').textContent = localStorage.getItem('ssait-profile-name-v1') || 'Искатель 47'; } catch {}
   const visible = tasks.filter(task => filter === 'all' || (filter === 'done' ? task.done : !task.done));
   list.replaceChildren();
   for (const task of visible) {
     const item = document.createElement('li'); item.className = `quest-item${task.done ? ' done' : ''}`;
     const check = document.createElement('button'); check.className = 'quest-check'; check.type = 'button'; check.setAttribute('aria-label', task.done ? 'Вернуть в активные' : 'Отметить выполненной'); check.textContent = task.done ? '✓' : '';
-    check.addEventListener('click', () => { task.done = !task.done; save(); render(); if (task.done) showToast('Миссия закрыта · +25 XP ✳'); });
+    check.addEventListener('click', () => { task.done = !task.done; task.completedAt = task.done ? Date.now() : 0; save(); render(); if (task.done) showToast('Миссия закрыта · +25 XP ✳'); });
     const copy = document.createElement('span'); copy.className = 'quest-copy';
     const title = document.createElement('b'); title.textContent = task.title;
     const meta = document.createElement('small'); meta.textContent = task.done ? 'ВЫПОЛНЕНО · +25 XP' : 'МАСТЕРСКАЯ · +25 XP'; copy.append(title, meta);
