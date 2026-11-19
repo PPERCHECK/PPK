@@ -1,11 +1,11 @@
-const CACHE = 'ssait-shell-v6';
+const CACHE = 'ssait-shell-v7';
 const FILES = [
   './', './index.html', './games/', './chat/', './tools/', './focus/', './notepad/', './idea-lab/', './sound-garden/', './notes/', './projects/', './quests/',
   './game/', './crafting/', './drift/', './runner/', './draw/', './profile/', './puzzle/', './memory/',
   './portal.css', './portal.js', './offline.js', './favicon.svg', './manifest.webmanifest',
   './assets/ssait-worlds.jpg', './vendor/three.module.js', './vendor/three.core.js', './vendor/THREE-LICENSE.txt',
   './chat/chat.css', './chat/chat.js', './tools/tools.css', './tools/tools.js', './focus/focus.js', './notepad/notepad.js', './idea-lab/ideas.js', './sound-garden/sound-garden.css', './sound-garden/sound-garden.js',
-  './game/game.css', './game/game.js', './crafting/craft.css', './crafting/craft.js',
+  './game/game.css', './game/game.js', './crafting/craft.css', './crafting/craft.js', './games/library.css',
   './drift/drift.css', './drift/drift.js', './runner/runner.css', './runner/runner.js',
   './draw/draw.css', './draw/draw.js', './profile/profile.css', './profile/profile.js', './puzzle/puzzle.css', './puzzle/puzzle.js', './games/games.css', './games/games.js', './quests/quests.css', './quests/quests.js', './memory/memory.css', './memory/memory.js'
 ];
